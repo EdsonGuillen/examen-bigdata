@@ -95,9 +95,9 @@
         const datos = @json($datos);
         
         // Preparar datos para el gráfico
-        const etiquetas = datos.map(item => item.departamento);
-        const maximos = datos.map(item => item.max);
-        const minimos = datos.map(item => item.min);
+        const etiquetas = datos.map(item => item.dept_name);
+        const maximos = datos.map(item => item.sueldo_max);
+        const minimos = datos.map(item => item.sueldo_min);
         const brechas = datos.map(item => item.brecha);
 
         const ctx = document.getElementById('graficoBrecha').getContext('2d');
