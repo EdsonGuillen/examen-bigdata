@@ -102,6 +102,47 @@ class ReportController extends Controller
 
         return view('graficos.promedios', compact('etiquetas', 'valores'));
     }
+
+    // Gráfico 2.4: Brecha Salarial por Departamento
+public function graficoBrechaSalarial(): View
+{
+    set_time_limit(300);
+    
+    $departamentos = DB::table('departments')->get();
+    $datos = [];
+
+    foreach ($departamentos as $depto) {
+        // Obtener el salario máximo del departamento
+        $max = DB::table('salaries as s')
+            ->join('dept_emp as de', 's.emp_no', '=', 'de.emp_no')
+            ->where('de.dept_no', $depto->dept_no)
+            ->where('de.to_date', '9999-01-01')
+            ->where('s.to_date', '9999-01-01')
+            ->max('s.salary');
+
+        // Obtener el salario mínimo del departamento
+        $min = DB::table('salaries as s')
+            ->join('dept_emp as de', 's.emp_no', '=', 'de.emp_no')
+            ->where('de.dept_no', $depto->dept_no)
+            ->where('de.to_date', '9999-01-01')
+            ->where('s.to_date', '9999-01-01')
+            ->min('s.salary');
+
+        $datos[] = [
+            'departamento' => $depto->dept_name,
+            'max' => $max,
+            'min' => $min,
+            'brecha' => $max - $min
+        ];
+    }
+
+    // Ordenar por brecha descendente
+    usort($datos, function ($a, $b) {
+        return $b['brecha'] - $a['brecha'];
+    });
+
+    return view('graficos.brecha_salarial', compact('datos'));
+}
     public function listado(Request $request): View
     {
         // Capturamos lo que el usuario escribe en el buscador (si escribe algo)
