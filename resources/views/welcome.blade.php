@@ -46,6 +46,9 @@
                         <a href="{{ url('/graficos/promedios') }}" class="btn btn-light text-start">
                             📶 <b>Promedios (Barras)</b> <small class="d-block text-muted">Comparativa salarial por depto</small>
                         </a>
+                        <a href="{{ url('/graficos/brecha-salarial') }}" class="btn btn-light text-start">
+                            ⚖️ <b>Brecha Salarial</b> <small class="d-block text-muted">Diferencia entre máximo y mínimo</small>
+                        </a>
                     </div>
                 </div>
             </div>
