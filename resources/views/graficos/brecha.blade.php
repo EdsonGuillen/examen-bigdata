@@ -40,15 +40,13 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($datos as $item)
-                                    <tr>
-                                        <td class="small">{{ $item['departamento'] }}</td>
-                                        <td class="text-end small fw-bold text-danger">
-                                            ${{ number_format($item['brecha']) }}
-                                        </td>
-                                    </tr>
-                                    @endforeach
-                                </tbody>
+    @foreach($datos as $item)
+    <tr>
+        <td class="small">{{ $item->dept_name }}</td>
+        <td class="text-end small fw-bold text-danger">${{ number_format($item->brecha) }}</td>
+    </tr>
+    @endforeach
+</tbody>
                             </table>
                         </div>
                     </div>
@@ -63,21 +61,20 @@
             <div class="col-md-3 mb-3">
                 <div class="card h-100 border-start border-danger border-4">
                     <div class="card-body">
-                        <h6 class="card-title text-truncate fw-bold" title="{{ $item['departamento'] }}">
-                            {{ $item['departamento'] }}
-                        </h6>
-                        <hr>
-                        <p class="mb-1 small">
+                        <h6 class="card-title text-truncate fw-bold" title="{{ $item->dept_name }}">
+    {{ $item->dept_name }}
+</h6>
+<p class="card-text text-danger fw-bold">
+    Brecha: ${{ number_format($item->brecha) }}
+</p>
+                     <hr>
+                       <p class="mb-1 small">
                             <span class="badge bg-success">Máximo</span>
-                            <strong class="float-end">${{ number_format($item['max']) }}</strong>
+                            <strong class="float-end">${{ number_format($item->sueldo_max) }}</strong>
                         </p>
                         <p class="mb-1 small">
                             <span class="badge bg-info">Mínimo</span>
-                            <strong class="float-end">${{ number_format($item['min']) }}</strong>
-                        </p>
-                        <p class="mb-0 small">
-                            <span class="badge bg-danger">Brecha</span>
-                            <strong class="float-end">${{ number_format($item['brecha']) }}</strong>
+                            <strong class="float-end">${{ number_format($item->sueldo_min) }}</strong>
                         </p>
                     </div>
                 </div>

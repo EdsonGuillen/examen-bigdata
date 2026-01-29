@@ -144,13 +144,14 @@ class ReportController extends Controller
         return view('reportes.contratados', compact('reporte'));
     }
 
-    
-    public function graficoBrecha(): View
+    public function graficoBrechaSalarial(): View
     {
+        set_time_limit(300); 
+
         $datos = DB::table('departments as d')
             ->join('dept_emp as de', 'd.dept_no', '=', 'de.dept_no')
             ->join('salaries as s', 'de.emp_no', '=', 's.emp_no')
-            ->select('d.dept_name', DB::raw('(MAX(s.salary) - MIN(s.salary)) as brecha'))
+            ->selectRaw('d.dept_name, MAX(s.salary) as sueldo_max, MIN(s.salary) as sueldo_min, MAX(s.salary) - MIN(s.salary) as brecha')
             ->where('s.to_date', '9999-01-01')
             ->groupBy('d.dept_no', 'd.dept_name')
             ->get();
@@ -158,8 +159,9 @@ class ReportController extends Controller
         $etiquetas = $datos->pluck('dept_name');
         $valores = $datos->pluck('brecha');
 
-        return view('graficos.brecha', compact('etiquetas', 'valores'));
-    }    public function estadisticasDeptos()
+        return view('graficos.brecha', compact('etiquetas', 'valores', 'datos'));
+    }
+       public function estadisticasDeptos()
     {
         set_time_limit(300);
         $reporte = DB::table('departments as d')
