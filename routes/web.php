@@ -14,3 +14,4 @@ Route::get('/graficos/top-salarios', [ReportController::class, 'graficoTopSalari
 Route::get('/graficos/promedios', [ReportController::class, 'graficoPromedios']);
 Route::get('/reportes/listado', [ReportController::class, 'listado']);
 Route::get('/reportes/estadisticas', [ReportController::class, 'estadisticasDeptos']);
+Route::get('/reportes/contratados', [ReportController::class, 'contratadosPorAnio']);

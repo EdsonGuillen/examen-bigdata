@@ -29,6 +29,9 @@
                         <a href="{{ url('/reportes/estadisticas') }}" class="btn btn-light text-start">
                             📊 <b>Estadísticas</b> <small class="d-block text-muted">Promedios y conteos por depto</small>
                         </a>
+                        <a href="{{ url('/reportes/contratados') }}" class="btn btn-light text-start">
+                            📅 <b>Contrataciones por Año</b> <small class="d-block text-muted">Histórico de ingresos</small>
+                        </a>
                     </div>
                 </div>
             </div>
