@@ -102,7 +102,6 @@ class ReportController extends Controller
 
         return view('graficos.promedios', compact('etiquetas', 'valores'));
     }
-    // 1. MODIFICACIÓN: Listado Completo (Punto 1.1)
     public function listado(Request $request): View
     {
         $busqueda = $request->get('buscar');
